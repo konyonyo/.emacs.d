@@ -34,6 +34,9 @@
 ;; C-tでウィンドウを切り替える。初期値はtranspose-chars
 (define-key global-map (kbd "C-t") 'other-window)
 
+;; C-x bでAnythingを起動
+(define-key global-map (kbd "C-x b") 'anything)
+
 ;;;;;;;;;;;;;;;;;;;
 ;; 文字コードの設定 ;;
 ;;;;;;;;;;;;;;;;;;;
