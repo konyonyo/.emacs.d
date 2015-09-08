@@ -84,6 +84,19 @@
 (set-face-background 'show-paren-match-face nil)
 (set-face-underline-p 'show-paren-match-face "yellow")
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; 改行、全角スペース、Tabの表示 ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(require 'jaspace)
+(setq jaspace-alternate-jaspace-string "□")
+(setq jaspace-alternate-eol-string "↓\n")
+(setq jaspace-highlight-tabs t)
+
+;;;;;;;;;;;;;;;;
+;; フックの設定 ;;
+;;;;;;;;;;;;;;;;
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; バックアップとオートセーブ設定 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -141,5 +154,26 @@
     ;; describe-bindingsをAnythingに置き換える
     (descbinds-anything-install)))
 
+;;;;;;;;;;;;;;;;;
+;; gaucheの設定 ;;
+;;;;;;;;;;;;;;;;;
+(setq process-coding-system-alist
+      (cons '("gosh" utf-8 . utf-8) process-coding-system-alist))
 
-    
+(setq scheme-program-name "gosh -i")
+(autoload 'scheme-mode "cmuscheme" "Major mode for Scheme." t)
+(autoload 'run-scheme "cmuscheme" "Run an inferior Scheme process." t)
+
+(defun scheme-other-window ()
+  "Run Gauche on other window"
+  (interactive)
+  (split-window-horizontally (/ (frame-width) 2))
+  (let ((buf-name (buffer-name (current-buffer))))
+    (scheme-mode)
+    (switch-to-buffer-other-window
+     (get-buffer-create "*scheme*"))
+    (run-scheme scheme-program-name)
+    (switch-to-buffer-other-window
+     (get-buffer-create buf-name))))
+
+(define-key global-map "\C-cs" 'scheme-other-window)
