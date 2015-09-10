@@ -9,10 +9,10 @@
   (let (path)
     (dolist (path paths paths)
       (let ((default-directory
-	      (expand-file-name (concat user-emacs-directory path))))
-	(add-to-list 'load-path default-directory)
-	(if (fboundp 'normal-top-level-add-subdirs-to-load-path)
-	    (normal-top-level-add-subdirs-to-load-path))))))
+              (expand-file-name (concat user-emacs-directory path))))
+        (add-to-list 'load-path default-directory)
+        (if (fboundp 'normal-top-level-add-subdirs-to-load-path)
+            (normal-top-level-add-subdirs-to-load-path))))))
 
 (add-to-load-path "elisp" "conf" "public_repos")
 
@@ -75,7 +75,7 @@
 ;; 表示テーマの設定
 (when (require 'color-theme nil t)
   (color-theme-initialize)
-  (color-theme-hober))
+  (color-theme-gray30))
 
 ;; 対応する括弧のハイライト
 (setq show-paren-delay 0)
