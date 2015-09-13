@@ -15,6 +15,11 @@
 
 (add-to-load-path "elisp" "conf" "public_repos")
 
+;; package.elの設定
+(when (require 'package nil t)
+  (add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/") t)
+  (package-initialize))
+
 ;;;;;;;;;;;;;;;;;;;;;
 ;; キーバインドの設定 ;;
 ;;;;;;;;;;;;;;;;;;;;;
@@ -116,10 +121,6 @@
   (auto-install-update-emacswiki-package-name t)
   (auto-install-compatibility-setup))
 
-;; MELPA-stableをリポジトリに追加
-(when (require 'package nil t)
-  (add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/") t))
-
 ;;;;;;;;;;;;;;;;;;;
 ;; Anythingの設定 ;;
 ;;;;;;;;;;;;;;;;;;;
@@ -164,14 +165,9 @@
 ;; auto-completeの設定 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;
 (when (require 'auto-complete-config nil t)
-  (ac-config-default)
-  (add-to-list 'ac-modes 'text-mode) ;; text-modeでも自動的に有効にする
-  (add-to-list 'ac-modes 'fundamental-mode) ;; fundamental-mode
-  (add-to-list 'ac-modes 'org-mode)
-  (add-to-list 'ac-modes 'yatex-mode)
-  (ac-set-trigger-key "TAB")
-  (setq ac-use-menu-map t) ;; 補完メニュー表示時にC-n/C-pで補完候補選択
-  (setq ac-use-fuzzy t)) ;; 曖昧マッチ
+  (add-to-list 'ac-dictionary-directories "~/.emacs.d/elisp/ac-dict")
+  (define-key ac-mode-map (kbd "M-TAB") 'auto-complete)
+  (ac-config-default))
 
 ;;;;;;;;;;;;;;;;;
 ;; gaucheの設定 ;;
