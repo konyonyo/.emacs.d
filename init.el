@@ -1,7 +1,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;
 ;; load-pathを追加する ;;
 ;;;;;;;;;;;;;;;;;;;;;;;
-
 (when (< emacs-major-version 23)
   (defvar user-emacs-directory "~/.emacs.d/"))
 
@@ -19,7 +18,6 @@
 ;;;;;;;;;;;;;;;;;;;;;
 ;; キーバインドの設定 ;;
 ;;;;;;;;;;;;;;;;;;;;;
-
 ;; C-mにnewline-and-indentを割り当てる。初期値はnewline
 (define-key global-map (kbd "C-m") 'newline-and-indent)
 
@@ -40,14 +38,12 @@
 ;;;;;;;;;;;;;;;;;;;
 ;; 文字コードの設定 ;;
 ;;;;;;;;;;;;;;;;;;;
-
 (set-language-environment "Japanese")
 (prefer-coding-system 'utf-8)
 
 ;;;;;;;;;;;;;;;;;;;;;
 ;; モードラインの設定 ;;
 ;;;;;;;;;;;;;;;;;;;;;
-
 ;; カラム番号も表示
 (column-number-mode t)
 
@@ -57,21 +53,18 @@
 ;;;;;;;;;;;;;;;;;;;;;
 ;; タイトルバーの設定 ;;
 ;;;;;;;;;;;;;;;;;;;;;
-
 ;; タイトルバーにファイルのフルパスを表示
 (setq frame-title-format "%f")
 
 ;;;;;;;;;;;;;;;;;;;
 ;; インデントの設定 ;;
 ;;;;;;;;;;;;;;;;;;;
-
 ;; インデントにタブ文字を使用しない
 (setq-default indent-tabs-mode nil)
 
 ;;;;;;;;;;;;;
 ;; 表示設定 ;;
 ;;;;;;;;;;;;;
-
 ;; 表示テーマの設定
 (when (require 'color-theme nil t)
   (color-theme-initialize)
@@ -87,12 +80,12 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; 改行、全角スペース、Tabの表示 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(require 'jaspace)
-(setq jaspace-alternate-jaspace-string "□")
-(setq jaspace-alternate-eol-string "↓\n")
-(setq jaspace-highlight-tabs t)
-(setq jaspace-modes (append jaspace-modes
-                            (list 'scheme-mode)))
+(when (require 'jaspace nil t)
+  (setq jaspace-alternate-jaspace-string "□")
+  (setq jaspace-alternate-eol-string "↓\n")
+  (setq jaspace-highlight-tabs t)
+  (setq jaspace-modes (append jaspace-modes
+                              (list 'scheme-mode))))
 
 ;;;;;;;;;;;;;;;;
 ;; フックの設定 ;;
