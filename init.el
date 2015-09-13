@@ -108,6 +108,11 @@
 (setq auto-save-file-name-transforms
       `((".*" ,(expand-file-name "~/.emacs.d/backups/") t)))
 
+;;;;;;;;;;;;;;;;;;;
+;; cua-modeの設定 ;;
+;;;;;;;;;;;;;;;;;;;
+(cua-mode t)
+(setq cua-enable-cua-keys nil)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; 拡張機能の自動インストール設定 ;;
@@ -118,7 +123,13 @@
   (auto-install-update-emacswiki-package-name t)
   (auto-install-compatibility-setup))
 
-;; Anythingの設定
+;; MELPA-stableをリポジトリに追加
+(when (require 'package nil t)
+  (add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/") t))
+
+;;;;;;;;;;;;;;;;;;;
+;; Anythingの設定 ;;
+;;;;;;;;;;;;;;;;;;;
 (when (require 'anything nil t)
   (setq
    ;; 候補を表示するまでの時間。デフォルトは0.5
@@ -155,6 +166,19 @@
   (when (require 'descbinds-anything nil t)
     ;; describe-bindingsをAnythingに置き換える
     (descbinds-anything-install)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;
+;; auto-completeの設定 ;;
+;;;;;;;;;;;;;;;;;;;;;;;;
+(when (require 'auto-complete-config nil t)
+  (ac-config-default)
+  (add-to-list 'ac-modes 'text-mode) ;; text-modeでも自動的に有効にする
+  (add-to-list 'ac-modes 'fundamental-mode) ;; fundamental-mode
+  (add-to-list 'ac-modes 'org-mode)
+  (add-to-list 'ac-modes 'yatex-mode)
+  (ac-set-trigger-key "TAB")
+  (setq ac-use-menu-map t) ;; 補完メニュー表示時にC-n/C-pで補完候補選択
+  (setq ac-use-fuzzy t)) ;; 曖昧マッチ
 
 ;;;;;;;;;;;;;;;;;
 ;; gaucheの設定 ;;
