@@ -90,7 +90,7 @@
   (setq jaspace-alternate-eol-string "↓\n")
   (setq jaspace-highlight-tabs t)
   (setq jaspace-modes (append jaspace-modes
-                              (list 'scheme-mode))))
+                              (list 'scheme-mode 'text-mode))))
 
 ;;;;;;;;;;;;;;;;
 ;; フックの設定 ;;
