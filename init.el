@@ -192,3 +192,12 @@
      (get-buffer-create buf-name))))
 
 (define-key global-map "\C-cs" 'scheme-other-window)
+
+;;;;;;;;;;;;;;;;;;
+;; haskellの設定 ;;
+;;;;;;;;;;;;;;;;;;
+(autoload 'haskell-mode "haskell-mode" nil t)
+(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
+(add-hook 'haskell-mode-hook 'font-lock-mode)
+(add-hook 'haskell-mode-hook 'imenu-add-menubar-index)
