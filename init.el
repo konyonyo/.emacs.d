@@ -201,3 +201,9 @@
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
 (add-hook 'haskell-mode-hook 'font-lock-mode)
 (add-hook 'haskell-mode-hook 'imenu-add-menubar-index)
+
+;;;;;;;;;;;;;;;;;
+;; geiserの設定 ;;
+;;;;;;;;;;;;;;;;;
+(setq geiser-racket-binary "/usr/bin/racket")
+(setq geiser-active-implementations '(racket))
