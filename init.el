@@ -207,3 +207,11 @@
 ;;;;;;;;;;;;;;;;;
 (setq geiser-racket-binary "/usr/bin/racket")
 (setq geiser-active-implementations '(racket))
+
+;;;;;;;;;;;;;;;;
+;; slimeの設定 ;;
+;;;;;;;;;;;;;;;;
+(setq inferior-lisp-program "sbcl")
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/slime"))
+(require 'slime)
+(slime-setup '(slime-repl slime-fancy slime-banner))
